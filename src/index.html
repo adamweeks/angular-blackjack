@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<htm data-ng-app="blackjack"l>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Blackjack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+        .ng-hide {
+            display: none!important;
+        }
+    </style>
+
+
+
+</head>
+<body>
+    <div data-ng-include="'app/layout/shell.html'"></div>
+
+    <!-- Begin: Vendor JS -->
+    <script src="bower_components/angular/angular.min.js"></script>
+    <!-- End: Vendor JS -->
+
+    <!-- Begin: Source JS -->
+    <script src="app/blackjack.module.js"></script>
+    <!-- End: Source JS -->
+</body>
+</html>
