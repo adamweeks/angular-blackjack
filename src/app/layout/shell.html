@@ -19,18 +19,19 @@
     </div>
 </nav>
 
-<div class="container" ng-controller="GameController as game">
+<div class="container">
 
     <div class="primary-area">
         <h1>Welcome to Angular Blackjack</h1>
-        <div ng-if="!game.started">
-            <button class="btn btn-primary" ng-click="game.start()">Start Game</button>
+        <div ng-controller="GameController as game">
+            <div ng-if="!game.started">
+                <button class="btn btn-primary" ng-click="game.start()">Start Game</button>
+            </div>
+            <div ng-if="game.started">
+                Game In Progress
+                <button class="btn btn-danger" ng-click="game.end()">End Game</button>
+            </div>
         </div>
-        <div ng-if="game.started">
-            Game In Progress
-            <button class="btn btn-danger" ng-click="game.end()">End Game</button>
-        </div>
-
     </div>
 
 </div>
