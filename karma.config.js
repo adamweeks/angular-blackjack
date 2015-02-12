@@ -17,6 +17,7 @@ module.exports = function(config) {
     files: [
 
         './src/bower_components/angular/angular.min.js',
+        './src/bower_components/angular-mocks/angular-mocks.js',
         './src/app/blackjack.module.js',
         './src/app/**/*.module.js',
         './src/app/**/*.js',
