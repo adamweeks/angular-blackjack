@@ -2,7 +2,8 @@
     'use strict';
 
     angular.module('blackjack', [
-        'blackjack.game'
+        'blackjack.game',
+        'blackjack.player'
     ]);
 
 })();
