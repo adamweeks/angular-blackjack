@@ -4,6 +4,7 @@ describe('GameController Unit Tests', function () {
     var gameController;
     beforeEach(function () {
         module('blackjack.game');
+        module('blackjack.player');
         inject(function ($controller) {
             gameController = $controller('GameController');
         });
@@ -18,5 +19,9 @@ describe('GameController Unit Tests', function () {
         expect(typeof gameController.start).toBe('function');
         expect(gameController.end).toBeDefined();
         expect(typeof gameController.end).toBe('function');
+    });
+
+    it('should have a player defined', function (){
+        expect(gameController.player).toBeDefined();
     });
 });
