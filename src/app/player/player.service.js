@@ -11,6 +11,10 @@
         };
 
         /////////////
+        function Player(playerName, initialScore) {
+            this.score = initialScore;
+            this.name = playerName;
+        }
 
         Player.prototype.changeScore = function(amountToChange){
             if(!angular.isDefined(this.score)){
@@ -24,15 +28,9 @@
             this.score = 0;
         };
 
-        function Player(playerName) {
-            this.score = 0;
-            this.name = playerName;
-        }
 
-
-
-        function newPlayer(playerName) {
-            var player = new Player(playerName);
+        function newPlayer(playerName, initialScore) {
+            var player = new Player(playerName, initialScore);
             return player;
         }
 

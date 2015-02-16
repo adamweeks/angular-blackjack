@@ -12,7 +12,7 @@
 
         game.init = function () {
             game.started = false;
-            game.player = PlayerService.newPlayer('Ringo');
+            game.player = PlayerService.newPlayer('Ringo', 100);
         };
 
         game.start = function () {
@@ -22,7 +22,7 @@
 
         game.end = function () {
             game.started = false;
-            game.player.changeScore(250);
+            game.player.changeScore(200);
         };
 
         game.reset = function () {
