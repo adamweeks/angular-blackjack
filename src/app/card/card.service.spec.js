@@ -22,32 +22,32 @@ describe('CardService Unit Tests', function () {
         });
 
         it('should be able to get a new deck of cards with the object type "Deck"', function () {
-            expect(typeof deck).toBe('Deck');
+            expect(deck instanceof CardService.Deck).toBe(true);
         });
 
         it('The deck should contain 52 cards', function () {
             expect(deck.cards.length).toBe(52);
         });
 
-        it('There should be no duplicate cards in a deck', function () {
-            var cardNames = [];
+        it('Each card should have a value and a rank.', function () {
             deck.cards.forEach(function (card) {
-                expect(cardNames.indexOf(card.name)).toBe(-1);
-                cardNames.push(card.name);
+                expect(card.rank).toBeDefined();
+                expect(card.suit).toBeDefined();
             });
         });
 
-        it('Each card should have a value and a suit.', function () {
+        it('There should be no duplicate cards in a deck', function () {
+            var cardNames = [];
             deck.cards.forEach(function (card) {
-                expect(card.value).toBeDefined();
-                expect(card.suite).toBeDefined();
+                expect(cardNames.indexOf(card.name())).toBe(-1);
+                cardNames.push(card.name());
             });
         });
 
         it('We should be able to "deal" a card from a deck that has undealt cards in it.', function () {
             expect(deck.deal).toBeDefined();
             var card = deck.deal();
-            expect(typeof card).toBe('Card');
+            expect(card instanceof CardService.Card).toBe(true);
         });
 
         it('Attempting to "deal" from a deck with no undealt cards returns false', function () {
@@ -58,7 +58,7 @@ describe('CardService Unit Tests', function () {
 
         it('When a card is dealt, it is no longer in the cards array', function () {
             var card = deck.deal();
-            expect(deck.indexOf(card)).toBe(-1);
+            expect(deck.cards.indexOf(card)).toBe(-1);
         });
 
         it('We should be able to shuffle the deck and randomize all undealt cards.', function () {
