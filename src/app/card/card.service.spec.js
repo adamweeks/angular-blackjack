@@ -7,8 +7,6 @@ describe('CardService Unit Tests', function () {
         inject(function (_CardService_) {
             CardService = _CardService_;
         });
-
-
     });
 
     it('should be true', function () {
@@ -77,18 +75,4 @@ describe('CardService Unit Tests', function () {
         });
 
     });
-
-
-    /*
-     We should be able to get a new deck of cards with the object type "Deck"
-     The deck should contain 52 cards
-     There should be no duplicate cards in a deck
-     Each card should have a value and a suit.
-     We should be able to 'deal' a card from a deck that has undealt cards in it.
-     Attempting to "deal" from a deck with no undealt cards returns false
-     When a card is dealt, it is no longer in the cards array
-     We should be able to shuffle the deck and randomize all undealt cards.
-     We should be able to 'reset' a deck that will move all dealt cards into the undealt status and shuffle.
-     */
-
 });
