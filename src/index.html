@@ -33,7 +33,21 @@
     <!-- End: Vendor JS -->
 
     <!-- Begin: Source JS -->
-    <script src="app/app.js"></script>
+    <!-- inject:js -->
+    <!-- endinject -->
+
+    <script src="app/blackjack.module.js"></script>
+
+    <script src="app/game/game.module.js"></script>
+    <script src="app/game/game.controller.js"></script>
+    <script src="app/game/game.directive.js"></script>
+
+    <script src="app/player/player.module.js"></script>
+    <script src="app/player/player.service.js"></script>
+
+    <script src="app/card/card.module.js"></script>
+    <script src="app/card/card.service.js"></script>
+    
     <!-- End: Source JS -->
 </body>
 </html>
