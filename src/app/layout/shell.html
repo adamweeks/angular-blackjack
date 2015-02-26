@@ -1,1 +1,37 @@
-Hi.
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Angular Blackjack</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="http://www.github.com/adamweeks/angular-blackjack">Source Code</a></li>
+                <li><a href="http://www.adamweeks.com">Author</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="primary-area">
+        <h1>Welcome to Angular Blackjack</h1>
+        <div ng-controller="GameController as game">
+            <div ng-if="!game.started">
+                <button class="btn btn-primary" ng-click="game.start()">Start Game</button>
+            </div>
+            <div ng-if="game.started">
+                Game In Progress
+                <button class="btn btn-danger" ng-click="game.end()">End Game</button>
+            </div>
+        </div>
+    </div>
+
+</div>
