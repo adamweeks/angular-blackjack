@@ -5,6 +5,7 @@ describe('GameController Unit Tests', function () {
     beforeEach(function () {
         module('blackjack.game');
         module('blackjack.player');
+        module('blackjack.card');
         inject(function ($controller) {
             gameController = $controller('GameController');
         });

@@ -7,6 +7,8 @@
     </div>
     <div ng-if="game.started">
         Game In Progress.
+        <div class="card" ng-repeat="card in game.playerCards">{{card.name()}}</div>
+        <button class="btn btn-warning" ng-click="game.hit()">HIT</button>
         <button class="btn btn-danger" ng-click="game.end()">End Game</button>
     </div>
     <button class="btn btn-danger btn-sm" ng-click="game.reset()">Reset Game</button>
