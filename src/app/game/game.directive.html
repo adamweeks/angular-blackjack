@@ -1,0 +1,9 @@
+<div>
+    <div ng-if="!game.started">
+        <button class="btn btn-primary" ng-click="game.start()">Start Game</button>
+    </div>
+    <div ng-if="game.started">
+        Game In Progress
+        <button class="btn btn-danger" ng-click="game.end()">End Game</button>
+    </div>
+</div>
