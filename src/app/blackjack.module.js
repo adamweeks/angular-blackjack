@@ -4,7 +4,8 @@
     angular.module('blackjack', [
         'blackjack.card',
         'blackjack.game',
-        'blackjack.player'
+        'blackjack.player',
+        'blackjack.dealer'
     ]);
 
 })();

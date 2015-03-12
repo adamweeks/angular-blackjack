@@ -7,14 +7,27 @@
 
     function GameService(){
         var service = {
-            handValue: handValue
+            handValue: handValue,
+            maxValue: maxValue
         };
-
-        return service;
 
         ////////////////////
 
+        var _maxValue = 21;
 
+        /**
+         * Returns the numeric maximum hand value before busting
+         * @returns {number}
+         */
+        function maxValue(){
+            return _maxValue;
+        }
+
+        /**
+         * Gets the value of an array of cards
+         * @param hand
+         * @returns {number}
+         */
         function handValue(hand){
             var aces = 0;
             var totalValue = 0;
@@ -48,5 +61,6 @@
             return totalValue;
         }
 
+        return service;
     }
 })();
