@@ -5,9 +5,9 @@
         .module('blackjack.game')
         .controller('GameController',GameController);
 
-    GameController.$inject = ['PlayerService', 'CardService', 'GameService'];
+    GameController.$inject = ['PlayerService', 'CardService', 'GameService', 'DealerService'];
 
-    function GameController(PlayerService, CardService, GameService){
+    function GameController(PlayerService, CardService, GameService, DealerService){
         var game = this;
 
         /**
@@ -22,11 +22,15 @@
          * Initialize our controller data
          */
         game.init = function () {
-            game.maxValue = 21;
+            game.maxValue = GameService.maxValue();
             game.canDeal = false;
             game.started = false;
             game.showResults = false;
             game.deck = CardService.newDeck();
+            game.dealer = DealerService.newDealer(game.deck);
+            game.betValue = 100;
+            game.playerCards = [];
+            game.handValue = 0;
         };
 
         /**
@@ -52,7 +56,7 @@
             game.showResults = false;
 
             //Our bet defaults to 100
-            game.player.changeScore(-100);
+            game.player.changeScore(game.betValue * -1);
 
             //Shuffle before dealing
             game.deck.shuffle();
@@ -64,8 +68,8 @@
             game.hit();
             game.hit();
 
-            //Calculate value of hand
-            game.getHandValue();
+            //Deal to the dealer
+            game.dealer.deal();
         };
 
         /**
@@ -81,14 +85,43 @@
          * and 'pays' to player score
          */
         game.end = function () {
-            //Since we have no dealer, we win if we don't bust
-            if(!game.busted) {
-                game.player.changeScore(200);
-                game.results = "YOU WON!";
-            }
-            else{
+            //Tell the dealer to finish his hand
+            game.dealer.finish();
+
+            if(game.busted){
                 game.results = "BUSTED";
             }
+            else{
+                var wonGame = false;
+                var tiedGame = false;
+                //Check against dealer's hand
+                if(game.dealer.busted){
+                    //Auto Win if dealer busts
+                    wonGame = true;
+                }
+                else{
+                    if(game.dealer.handValue === game.handValue){
+                        tiedGame = true;
+                    }
+                    else{
+                        wonGame = (game.handValue > game.dealer.handValue);
+                    }
+                }
+
+                if(wonGame){
+                    //Winning pays double the bet
+                    game.player.changeScore(game.betValue * 2);
+                    game.results = "YOU WON!";
+                }
+                else if(tiedGame){
+                    //A 'PUSH' gives the player back their bet
+                    game.player.changeScore(game.betValue);
+                }
+                else{
+                    game.results = "DEALER WON";
+                }
+            }
+
             game.canHit = false;
             game.canDeal = true;
             game.showResults = true;

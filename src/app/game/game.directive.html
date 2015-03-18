@@ -26,13 +26,39 @@
         </div>
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="card" ng-repeat="card in game.playerCards">{{card.name()}}</div>
+                <div ng-if="game.dealer.isDone">
+                    <p>Dealer Hand: {{game.dealer.handValue}}</p>
+                </div>
+                <div ng-if="!game.dealer.isDone">
+                    <p>Dealer</p>
+                </div>
+                <div class="well well-lg">
+                    <div ng-if="!game.dealer.isDone && game.dealer.cards.length > 0">
+                        <div class="card">
+                            {{game.dealer.cards[0].name()}}
+                        </div>
+                        <div class="card">
+                            ******
+                        </div>
+                    </div>
+
+                    <div ng-if="game.dealer.isDone" class="card" ng-repeat="card in game.dealer.cards">
+                        {{card.name()}}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="panel-footer" ng-if="game.started">
-            <p>Hand Value: {{game.handValue}}</p>
+
+            <div class="row">
+                <div ng-if="game.started">
+                    <p>Player Hand: {{game.handValue}}</p>
+                </div>
+                <div ng-if="!game.started">
+                    <p>Player</p>
+                </div>
+                <div class="well well-lg">
+                    <div class="card row" ng-repeat="card in game.playerCards">{{card.name()}}</div>
+                </div>
+            </div>
         </div>
     </div>
 

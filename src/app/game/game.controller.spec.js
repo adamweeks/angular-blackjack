@@ -1,17 +1,20 @@
 'use strict';
 
 describe('GameController Unit Tests', function () {
-    var gameController, CardService, PlayerService;
+    var gameController, CardService, PlayerService, DealerService;
     beforeEach(function () {
         module('blackjack.game');
         module('blackjack.player');
         module('blackjack.card');
-        inject(function ($controller, _CardService_, _PlayerService_) {
+        module('blackjack.dealer');
+        inject(function ($controller, _CardService_, _PlayerService_, _DealerService_) {
             CardService = _CardService_;
             PlayerService = _PlayerService_;
+            DealerService = _DealerService_;
             gameController = $controller('GameController', {
                 CardService: CardService,
-                PlayerService: PlayerService
+                PlayerService: PlayerService,
+                DealerService: DealerService
             });
         });
     });
