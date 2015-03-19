@@ -85,7 +85,7 @@ gulp.task('html', function () {
 gulp.task('injectDev', function(){
     return gulp.src('./src/index.html')
         .pipe(inject(gulp.src(['./src/app/**/*.module.js','./src/app/**/*.js','!./src/app/**/*.spec.js'], {read: false}), {relative: true, name: ''}))
-        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower', relative: true}))
+        .pipe(inject(gulp.src(bowerFiles({debugging: true}), {read: false}), {name: 'bower', relative: true}))
         .pipe(inject(gulp.src('./src/content/*.css',{read:false}), {relative: true}))
         .pipe(gulp.dest('./src'));
 });

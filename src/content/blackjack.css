@@ -2,8 +2,80 @@ body {
     padding-top: 50px;
 }
 
+* {margin: 0; padding: 0;}
+
 .primary-area {
     padding: 40px 15px;
     text-align: center;
 }
 
+
+/** Cards **/
+
+.playingCards {
+    display: table;
+    margin: 0 auto;
+}
+
+.card {
+    position: relative;
+    float: left;
+    margin-right: 10px;
+    width: 150px;
+    height: 220px;
+    border-radius: 10px;
+    background: #fff;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+}
+
+.card p {
+    text-align: center;
+    font: 100px/220px Georgia, Times New Roman, serif;
+}
+
+.suitdiamonds {
+    color: #ff0000;
+}
+
+.suitdiamonds:before, .suitdiamonds:after {
+    content: "♦";
+}
+
+.suithearts {
+    color: #ff0000;
+}
+
+.suithearts:before, .suithearts:after {
+    content: "♥";
+}
+
+.suitclubs {
+    color: #000;
+}
+
+.suitclubs:before, .suitclubs:after {
+    content: "♣";
+}
+
+.suitspades {
+    color: #000;
+}
+
+.suitspades:before, .suitspades:after {
+    content: "♠";
+}
+
+div[class*='suit']:before {
+    position: absolute;
+    font-size: 35px;
+    left: 5px;
+    top: 5px;
+}
+
+div[class*='suit']:after {
+    position: absolute;
+    font-size: 35px;
+    right: 5px;
+    bottom: 5px;
+}
