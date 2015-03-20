@@ -17,11 +17,13 @@
         //
         var directive = {
             restrict: 'E',
-            template:   '<div class="card" ng-class="vm.suit">' +
+            template:   '<div class="card" ng-class="vm.suit" ng-if="!vm.card.hideValue">' +
                         '<p>{{vm.rank}}</p>' +
-                        '</div>',
+                        '</div>' +
+                        '<div class="card back" ng-if="vm.card.hideValue"></div>',
             scope: {
-                card: '='
+                card: '=',
+                hideValue: '='
             },
             controller: 'BlackjackCardController',
             controllerAs: 'vm',
@@ -39,24 +41,30 @@
         vm.suit;
 
         vm.init = function(){
-            vm.rank = vm.card.rank;
-            var cardSuit;
-            switch(vm.card.suit){
-                //'C', 'D', 'S', 'H'
-                case 'C':
-                    cardSuit = 'suitclubs';
-                    break;
-                case 'D':
-                    cardSuit = 'suitdiamonds';
-                    break;
-                case 'H':
-                    cardSuit = 'suithearts';
-                    break;
-                case 'S':
-                    cardSuit = 'suitspades';
-                    break;
+            if(vm.hideValue){
+                vm.suit = 'back';
+                vm.rank = '';
             }
-            vm.suit = cardSuit;
+            else {
+                vm.rank = vm.card.rank;
+                var cardSuit;
+                switch (vm.card.suit) {
+                    //'C', 'D', 'S', 'H'
+                    case 'C':
+                        cardSuit = 'suitclubs';
+                        break;
+                    case 'D':
+                        cardSuit = 'suitdiamonds';
+                        break;
+                    case 'H':
+                        cardSuit = 'suithearts';
+                        break;
+                    case 'S':
+                        cardSuit = 'suitspades';
+                        break;
+                }
+                vm.suit = cardSuit;
+            }
         };
 
         vm.init();

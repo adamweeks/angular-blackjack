@@ -70,6 +70,14 @@ gulp.task('css', function () {
 });
 
 /**
+ * Copies application css to build folder
+ */
+gulp.task('images', function () {
+    return gulp.src('./src/content/*.png')
+        .pipe(gulp.dest('./build/content'));
+});
+
+/**
  * Copies html files to build folder
  */
 gulp.task('html', function () {
@@ -93,6 +101,6 @@ gulp.task('injectDev', function(){
 
 
 
-gulp.task('build', ['inject']);
+gulp.task('build', ['inject', 'images']);
 
 gulp.task('buildDev', ['injectDev']);

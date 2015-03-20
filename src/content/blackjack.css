@@ -34,6 +34,12 @@ body {
     font: 100px/220px Georgia, Times New Roman, serif;
 }
 
+.card.back {
+    background-color: #800080;
+    background-image: url('argyle.png');
+    /** Background from http://www.transparenttextures.com/ **/
+}
+
 .suitdiamonds {
     color: #ff0000;
 }
