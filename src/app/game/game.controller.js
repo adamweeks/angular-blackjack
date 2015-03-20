@@ -59,7 +59,7 @@
             game.player.changeScore(game.betValue * -1);
 
             //Shuffle before dealing
-            game.deck.shuffle();
+            game.deck.reset();
 
             //Empty our dealt card array
             game.playerCards = [];
