@@ -75,13 +75,13 @@ body {
 div[class*='suit']:before {
     position: absolute;
     font-size: 35px;
-    left: 5px;
-    top: 5px;
+    left: 10px;
+    top: 0px;
 }
 
 div[class*='suit']:after {
     position: absolute;
     font-size: 35px;
-    right: 5px;
-    bottom: 5px;
+    right: 10px;
+    bottom: 1px;
 }
