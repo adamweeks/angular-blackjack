@@ -9,20 +9,55 @@ body {
     text-align: center;
 }
 
+.card-table {
+    background-color: #168245;
+    background-image: url('felt.png');
+    height: 600px;
+    position: relative;
+    border-radius: 25px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.game-results {
+    z-index: 10;
+    width: 100%;
+    top: 125px;
+    position: absolute;
+    background-image: url('debut-dark.png');
+
+}
+
+.game-results .result-text {
+    font-family: 'Lora', serif;
+    color: white;
+    font-size: 125px;
+    text-shadow: 2px 2px #ff0000;
+    text-align: center;
+    opacity: 1.0;
+}
+
+.action-bar {
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    right: 15%;
+    margin: 0 auto;
+}
 
 /** Cards **/
 
 .playingCards {
     display: table;
-    margin: 0 auto;
+    margin: 5px auto;
 }
 
 .card {
     position: relative;
     float: left;
     margin-right: 10px;
-    width: 150px;
-    height: 220px;
+    width: 128px;
+    height: 180px;
     border-radius: 10px;
     background: #fff;
     -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
@@ -31,7 +66,7 @@ body {
 
 .card p {
     text-align: center;
-    font: 100px/220px Georgia, Times New Roman, serif;
+    font: 80px/175px Georgia, Times New Roman, serif;
 }
 
 .card.back {
