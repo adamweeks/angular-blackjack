@@ -4,6 +4,8 @@ body {
 
 * {margin: 0; padding: 0;}
 
+/** Play Area **/
+
 .primary-area {
     padding: 40px 15px;
     text-align: center;
@@ -19,10 +21,37 @@ body {
     padding-bottom: 50px;
 }
 
+/** Scoreboard **/
+.scoreboard {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    width: 175px;
+    height: 175px;
+    border: solid;
+    border-radius: 15px;
+    background-image: url('debut-dark.png');
+    color: white;
+    font-family: 'Lora', serif;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.scoreboard .title {
+    font-size: 15px;
+}
+
+.scoreboard .detail {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/** Results **/
+
 .game-results {
     z-index: 10;
     width: 100%;
-    top: 125px;
+    top: 175px;
     position: absolute;
     background-image: url('debut-dark.png');
 
@@ -31,18 +60,33 @@ body {
 .game-results .result-text {
     font-family: 'Lora', serif;
     color: white;
-    font-size: 125px;
+    line-height: 175px;
+    font-size: 150px;
     text-shadow: 2px 2px #ff0000;
     text-align: center;
     opacity: 1.0;
 }
 
+/** Actions **/
+
 .action-bar {
     position: absolute;
     bottom: 0;
-    left: 15%;
-    right: 15%;
+    left: 25%;
+    right: 25%;
     margin: 0 auto;
+    height: 50px;
+
+}
+
+.action-bar button {
+    height: 50px;
+}
+
+/** Hands **/
+
+.hand-spacer {
+    height: 50px;
 }
 
 /** Cards **/

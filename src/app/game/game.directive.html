@@ -15,12 +15,24 @@
             </div>
         </div>
         <!-- Hands -->
-        <div class="row dealer-hand">
-            <blackjack-hand cards="game.dealer.cards" dealer="true" dealer-is-done="game.dealer.isDone"></blackjack-hand>
+        <div class="playing-area">
+            <div class="dealer-hand hand">
+                <blackjack-hand cards="game.dealer.cards" dealer="true" dealer-is-done="game.dealer.isDone"></blackjack-hand>
+            </div>
+            <div class="hand-spacer"></div>
+            <div class="player-hand hand">
+                <blackjack-hand cards="game.playerCards" dealer="false"></blackjack-hand>
+            </div>
         </div>
-        <div class="row player-hand">
-            <blackjack-hand cards="game.playerCards" dealer="false"></blackjack-hand>
+
+        <!-- Scoreboard -->
+        <div class="scoreboard" ng-if="game.started">
+            <p class="title">Player:</p>
+            <p class="detail">{{game.player.name}}</p>
+            <p class="title">Score:</p>
+            <p class="detail">{{game.player.score}}</p>
         </div>
+
         <!-- Actions -->
         <div class="action-bar">
             <div class="btn-group btn-group-justified">
@@ -37,15 +49,4 @@
         </div>
     </div>
 
-</div>
-
-<!-- Game Actions -->
-<div class="panel panel-default">
-    <div class="row" ng-if="game.started">
-        <!-- Scoreboard -->
-        <div class="col-md-3">
-            <p>Player: {{game.player.name}}</p>
-            <p>Score: {{game.player.score}}</p>
-        </div>
-    </div>
 </div>
