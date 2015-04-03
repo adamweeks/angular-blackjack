@@ -5,9 +5,9 @@
         .module('blackjack.game')
         .controller('GameController',GameController);
 
-    GameController.$inject = ['PlayerService', 'CardService', 'GameService', 'DealerService'];
+    GameController.$inject = ['$timeout','PlayerService', 'CardService', 'GameService', 'DealerService'];
 
-    function GameController(PlayerService, CardService, GameService, DealerService){
+    function GameController($timeout, PlayerService, CardService, GameService, DealerService){
         var game = this;
 
         /**
@@ -65,8 +65,8 @@
             game.playerCards = [];
 
             //Deal the cards
-            game.hit();
-            game.hit();
+            game.hit(false);
+            game.hit(false);
 
             //Deal to the dealer
             game.dealer.deal();
@@ -74,10 +74,36 @@
 
         /**
          * Adds a card to our hand and calculates value.
+         * @param animate - Animate the card in
          */
-        game.hit = function () {
-            game.playerCards.push(game.deck.deal());
-            game.getHandValue();
+        game.hit = function (animate) {
+            var card = game.deck.deal();
+            game.dealCardToPlayer(card, animate, function(){
+                game.getHandValue();
+            });
+
+
+        };
+
+        /**
+         *
+         * @param card
+         * @param animate
+         * @param callback
+         */
+        game.dealCardToPlayer = function(card, animate, callback){
+            if(animate) {
+                card.hideValue = true;
+                game.playerCards.push(card);
+                $timeout(function () {
+                    card.hideValue = false;
+                    callback();
+                }, 250);
+            }
+            else{
+                game.playerCards.push(card);
+                callback();
+            }
         };
 
         /**
@@ -86,45 +112,50 @@
          */
         game.end = function () {
             //Tell the dealer to finish his hand
-            game.dealer.finish();
-
-            if(game.busted){
-                game.results = "BUSTED";
-            }
-            else{
-                var wonGame = false;
-                var tiedGame = false;
-                //Check against dealer's hand
-                if(game.dealer.busted){
-                    //Auto Win if dealer busts
-                    wonGame = true;
+            game.dealer.finish(function(){
+                if(game.busted){
+                    game.results = "BUSTED";
                 }
                 else{
-                    if(game.dealer.handValue === game.handValue){
-                        tiedGame = true;
+                    var wonGame = false;
+                    var tiedGame = false;
+                    //Check against dealer's hand
+                    if(game.dealer.busted){
+                        //Auto Win if dealer busts
+                        wonGame = true;
                     }
                     else{
-                        wonGame = (game.handValue > game.dealer.handValue);
+                        if(game.dealer.handValue === game.handValue){
+                            tiedGame = true;
+                        }
+                        else{
+                            wonGame = (game.handValue > game.dealer.handValue);
+                        }
+                    }
+
+                    if(wonGame){
+                        //Winning pays double the bet
+                        game.player.changeScore(game.betValue * 2);
+                        game.results = "YOU WON!";
+                    }
+                    else if(tiedGame){
+                        //A 'PUSH' gives the player back their bet
+                        game.player.changeScore(game.betValue);
+                        game.results = "GAME PUSHED";
+                    }
+                    else{
+                        game.results = "DEALER WON";
                     }
                 }
 
-                if(wonGame){
-                    //Winning pays double the bet
-                    game.player.changeScore(game.betValue * 2);
-                    game.results = "YOU WON!";
-                }
-                else if(tiedGame){
-                    //A 'PUSH' gives the player back their bet
-                    game.player.changeScore(game.betValue);
-                }
-                else{
-                    game.results = "DEALER WON";
-                }
-            }
+                game.canHit = false;
+                game.canDeal = true;
+                $timeout(function() {
+                    game.showResults = true;
+                },500);
+            });
 
-            game.canHit = false;
-            game.canDeal = true;
-            game.showResults = true;
+
         };
 
         /**

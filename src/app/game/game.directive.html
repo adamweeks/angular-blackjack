@@ -40,7 +40,7 @@
                     <button class="btn btn-primary" ng-click="game.deal()" ng-disabled="!game.canDeal">DEAL</button>
                 </div>
                 <div class="btn-group" role="group">
-                    <button class="btn btn-warning" ng-click="game.hit()" ng-disabled="!game.canHit">HIT</button>
+                    <button class="btn btn-warning" ng-click="game.hit(true)" ng-disabled="!game.canHit">HIT</button>
                 </div>
                 <div class="btn-group" role="group">
                     <button class="btn btn-danger" ng-click="game.end()" ng-disabled="!game.canHit">STAY</button>
