@@ -22,8 +22,7 @@
                         '</div>' +
                         '<div class="card back" ng-if="vm.card.hideValue"></div>',
             scope: {
-                card: '=',
-                hideValue: '='
+                card: '='
             },
             controller: 'BlackjackCardController',
             controllerAs: 'vm',

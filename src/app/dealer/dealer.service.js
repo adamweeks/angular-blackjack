@@ -39,8 +39,8 @@
              */
             dealer.deal = function(){
                 dealer.init();
-                dealer.hit();
-                dealer.hit();
+                dealer.hit(true);
+                dealer.hit(false);
             };
 
             /**
@@ -49,20 +49,26 @@
              */
             dealer.finish = function () {
                 while(dealer.handValue < dealer.minValue){
-                    dealer.hit();
+                    dealer.hit(false);
                 }
                 if(dealer.handValue > dealer.maxValue){
                     dealer.busted = true;
                 }
+                dealer.cards.forEach(function(card){
+                    card.hideValue = false;
+                });
                 dealer.isDone = true;
 
             };
 
             /**
              * Deals a card to the dealer's hand
+             * @param hideCard
              */
-            dealer.hit = function(){
-                dealer.cards.push(dealer.deck.deal());
+            dealer.hit = function(hideCard){
+                var card = dealer.deck.deal();
+                card.hideValue = hideCard;
+                dealer.cards.push(card);
                 dealer.getHandValue();
             };
 
