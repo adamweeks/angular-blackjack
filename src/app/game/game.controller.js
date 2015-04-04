@@ -141,7 +141,7 @@
                     else if(tiedGame){
                         //A 'PUSH' gives the player back their bet
                         game.player.changeScore(game.betValue);
-                        game.results = "GAME PUSHED";
+                        game.results = "HAND PUSHED";
                     }
                     else{
                         game.results = "DEALER WON";
