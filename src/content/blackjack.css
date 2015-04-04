@@ -84,6 +84,9 @@ body {
 }
 
 /** Hands **/
+.hand {
+
+}
 
 .hand-spacer {
     height: 50px;
@@ -92,13 +95,12 @@ body {
 /** Cards **/
 
 .playingCards {
-    display: table;
-    margin: 5px auto;
+    position: relative;
+    height: 180px;
+    margin-left: 400px;
 }
 
 .card {
-    position: relative;
-    float: left;
     margin-right: 10px;
     width: 128px;
     height: 180px;
@@ -108,9 +110,59 @@ body {
     box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
 }
 
+.card-index-0 {
+    position: absolute;
+    left: 0;
+}
+
+.card-index-1 {
+    position: absolute;
+    left: 40px;
+}
+
+.card-index-2 {
+    position: absolute;
+    left: 80px;
+}
+
+.card-index-3 {
+    position: absolute;
+    left: 120px;
+}
+
+.card-index-4 {
+    position: absolute;
+    left: 160px;
+}
+
+.card-index-5 {
+    position: absolute;
+    left: 200px;
+}
+
+.card-index-6 {
+    position: absolute;
+    left: 240px;
+}
+
+.card-index-7 {
+    position: absolute;
+    left: 280px;
+}
+
+.card-index-8 {
+    position: absolute;
+    left: 320px;
+}
+
 .card p {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 35px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 35px;
     text-align: center;
-    font: 80px/175px Georgia, Times New Roman, serif;
 }
 
 .card.back {
@@ -154,8 +206,10 @@ body {
 div[class*='suit']:before {
     position: absolute;
     font-size: 35px;
-    left: 10px;
-    top: 0px;
+    width: 35px;
+    left: 0px;
+    top: 30px;
+    text-align: center;
 }
 
 div[class*='suit']:after {

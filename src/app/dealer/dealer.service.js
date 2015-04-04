@@ -49,7 +49,7 @@
              * @param callback
              */
             dealer.finish = function (callback) {
-                
+
                 var loop = {
                     next: function(){
                         dealer.getHandValue();

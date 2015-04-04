@@ -15,7 +15,7 @@
         var directive = {
             restrict: 'E',
             template:   '<div class="playingCards">' +
-                        '<blackjack-card ng-repeat="card in cards" card="card"></blackjack-card>' +
+                        '<blackjack-card ng-repeat="card in cards track by $index" card="card" card-index="{{$index}}"></blackjack-card>' +
                         '</div>',
             scope: {
                 cards: '='

@@ -17,12 +17,13 @@
         //
         var directive = {
             restrict: 'E',
-            template:   '<div class="card" ng-class="vm.suit" ng-if="!vm.card.hideValue">' +
+            template:   '<div class="card" ng-class="[vm.suit, vm.cardIndexClass]" ng-if="!vm.card.hideValue">' +
                         '<p>{{vm.rank}}</p>' +
                         '</div>' +
-                        '<div class="card back" ng-if="vm.card.hideValue"></div>',
+                        '<div class="card back" ng-class="vm.cardIndexClass" ng-if="vm.card.hideValue"></div>',
             scope: {
-                card: '='
+                card: '=',
+                cardIndex: '@'
             },
             controller: 'BlackjackCardController',
             controllerAs: 'vm',
@@ -64,6 +65,8 @@
                 }
                 vm.suit = cardSuit;
             }
+
+            vm.cardIndexClass = 'card-index-' + vm.cardIndex;
         };
 
         vm.init();
