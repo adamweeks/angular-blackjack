@@ -8,6 +8,7 @@
 
     BlackjackCard.$inject = ['$window'];
 
+    BlackjackCardController.$inject = ['$scope'];
     /* @ngInject */
     function BlackjackCard($window)
     {
@@ -34,13 +35,21 @@
     }
 
     /* @ngInject */
-    function BlackjackCardController(){
+    function BlackjackCardController($scope){
         var vm = this;
 
         vm.rank;
         vm.suit;
 
         vm.init = function(){
+            vm.displayCard();
+
+            $scope.$watchCollection('vm.card',function(newC,oldC){
+                vm.displayCard();
+            });
+        };
+
+        vm.displayCard = function(){
             if(vm.hideValue){
                 vm.suit = 'back';
                 vm.rank = '';

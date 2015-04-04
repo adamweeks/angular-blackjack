@@ -62,7 +62,7 @@
             game.deck.reset();
 
             //Empty our dealt card array
-            game.playerCards = [];
+            game.playerCards.length = 0;
 
             //Deal the cards
             game.hit(false);
