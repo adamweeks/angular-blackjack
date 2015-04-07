@@ -5,9 +5,9 @@
         .module('blackjack.dealer')
         .factory('DealerService', DealerService);
 
-    DealerService.$inject =['GameService'];
+    DealerService.$inject =['$timeout','GameService'];
 
-    function DealerService(GameService){
+    function DealerService($timeout, GameService){
         var service = {
             newDealer: newDealer,
             Dealer: Dealer
@@ -39,31 +39,70 @@
              */
             dealer.deal = function(){
                 dealer.init();
-                dealer.hit();
-                dealer.hit();
+                dealer.hit(true, false, dealer.getHandValue);
+                dealer.hit(false, false, dealer.getHandValue);
             };
 
             /**
              * After player has completed game, tell dealer to finish
              * by dealing out until hand is busted or between 17-21
+             * @param callback
              */
-            dealer.finish = function () {
-                while(dealer.handValue < dealer.minValue){
-                    dealer.hit();
-                }
-                if(dealer.handValue > dealer.maxValue){
-                    dealer.busted = true;
-                }
-                dealer.isDone = true;
+            dealer.finish = function (callback) {
+
+                var loop = {
+                    next: function(){
+                        dealer.getHandValue();
+                        if(dealer.handValue < dealer.minValue) {
+                            //Animate Card In
+                            dealer.hit(false, true, function () {
+                                loop.next();
+                            });
+                        }
+                        else{
+                            loop.done();
+                        }
+                    },
+                    done: function(){
+                        if(dealer.handValue > dealer.maxValue){
+                            dealer.busted = true;
+                        }
+                        dealer.isDone = true;
+                        callback();
+                    }
+                };
+
+                //Reveal first card, then play:
+                $timeout(function(){
+                    dealer.cards.forEach(function(card){
+                        card.hideValue = false;
+                    });
+                    loop.next();
+                },500);
 
             };
 
             /**
              * Deals a card to the dealer's hand
+             * @param hideCard
+             * @param animate
+             * @param callback
              */
-            dealer.hit = function(){
-                dealer.cards.push(dealer.deck.deal());
-                dealer.getHandValue();
+            dealer.hit = function(hideCard, animate, callback){
+                var card = dealer.deck.deal();
+                card.hideValue = hideCard;
+                dealer.cards.push(card);
+
+                if(animate){
+                    card.hideValue = true;
+                    $timeout(function(){
+                        card.hideValue = false;
+                        callback();
+                    },1000);
+                }
+                else {
+                    callback();
+                }
             };
 
             /**

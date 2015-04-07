@@ -47,4 +47,11 @@ describe('GameController Unit Tests', function () {
         expect(gameController.started).toBe(true);
     });
 
+    it('should reset the deck before dealing', function(){
+        spyOn(gameController.deck, 'reset');
+        gameController.start();
+        gameController.deal();
+        expect(gameController.deck.reset).toHaveBeenCalled();
+    });
+
 });

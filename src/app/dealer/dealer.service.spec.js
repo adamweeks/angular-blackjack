@@ -1,14 +1,15 @@
 'use strict';
 
 describe('DealerService Unit Tests', function () {
-    var DealerService, CardService;
+    var DealerService, CardService, $timeout;
     beforeEach(function () {
         module('blackjack.dealer');
         module('blackjack.game');
         module('blackjack.card');
-        inject(function (_DealerService_, _CardService_) {
+        inject(function (_DealerService_, _CardService_, _$timeout_) {
             DealerService = _DealerService_;
             CardService = _CardService_;
+            $timeout = _$timeout_;
         });
     });
 
@@ -36,21 +37,38 @@ describe('DealerService Unit Tests', function () {
 
         it('should properly finish a hand greater than minValue', function () {
             dealer.deal();
-            dealer.finish();
+            spyOn(dealer,'getHandValue').andCallFake(function(){
+                dealer.handValue = 21;
+            });
+            dealer.finish(function(){
+
+            });
+            $timeout.flush();
             expect(dealer.handValue).toBeGreaterThan(dealer.minValue-1);
         });
 
-        it('should set isDone value after finishing', function () {
+        it('should set isDone value after finishing', inject(function ($timeout) {
             dealer.deal();
             expect(dealer.isDone).toBe(false);
-            dealer.finish();
+            spyOn(dealer,'getHandValue').andCallFake(function(){
+                dealer.handValue = 23;
+            });
+            dealer.finish(function(){
+
+            });
+            $timeout.flush();
             expect(dealer.isDone).toBe(true);
-        });
+        }));
 
         it('should bust if finishing over max value', function(){
             dealer.deal();
-            dealer.finish();
-            expect(dealer.busted).toBe(dealer.handValue > dealer.maxValue);
+            spyOn(dealer,'getHandValue').andCallFake(function(){
+                dealer.handValue = 23;
+            });
+            dealer.finish(function(){
+                expect(dealer.busted).toBe(true);
+            });
+            $timeout.flush();
         })
     });
 });

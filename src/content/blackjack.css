@@ -2,8 +2,219 @@ body {
     padding-top: 50px;
 }
 
+* {margin: 0; padding: 0;}
+
+/** Play Area **/
+
 .primary-area {
     padding: 40px 15px;
     text-align: center;
 }
 
+.card-table {
+    background-color: #168245;
+    background-image: url('felt.png');
+    height: 600px;
+    position: relative;
+    border-radius: 25px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+/** Scoreboard **/
+.scoreboard {
+    position: absolute;
+    bottom: 10px;
+    left: 15px;
+    width: 175px;
+    height: 175px;
+    border: solid;
+    border-radius: 15px;
+    background-image: url('debut-dark.png');
+    color: white;
+    font-family: 'Lora', serif;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.scoreboard .title {
+    font-size: 15px;
+}
+
+.scoreboard .detail {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/** Results **/
+
+.game-results {
+    z-index: 10;
+    width: 100%;
+    top: 175px;
+    position: absolute;
+    background-image: url('debut-dark.png');
+
+}
+
+.game-results .result-text {
+    font-family: 'Lora', serif;
+    color: white;
+    line-height: 175px;
+    font-size: 150px;
+    text-shadow: 2px 2px #ff0000;
+    text-align: center;
+    opacity: 1.0;
+}
+
+/** Actions **/
+
+.action-bar {
+    position: absolute;
+    bottom: 0;
+    left: 25%;
+    right: 25%;
+    margin: 0 auto;
+    height: 50px;
+
+}
+
+.action-bar button {
+    height: 50px;
+}
+
+/** Hands **/
+.hand {
+
+}
+
+.hand-spacer {
+    height: 50px;
+}
+
+/** Cards **/
+
+.playingCards {
+    position: relative;
+    height: 180px;
+    margin-left: 400px;
+}
+
+.card {
+    margin-right: 10px;
+    width: 128px;
+    height: 180px;
+    border-radius: 10px;
+    background: #fff;
+    -webkit-box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+    box-shadow: 3px 3px 7px rgba(0,0,0,0.3);
+}
+
+.card-index-0 {
+    position: absolute;
+    left: 0;
+}
+
+.card-index-1 {
+    position: absolute;
+    left: 40px;
+}
+
+.card-index-2 {
+    position: absolute;
+    left: 80px;
+}
+
+.card-index-3 {
+    position: absolute;
+    left: 120px;
+}
+
+.card-index-4 {
+    position: absolute;
+    left: 160px;
+}
+
+.card-index-5 {
+    position: absolute;
+    left: 200px;
+}
+
+.card-index-6 {
+    position: absolute;
+    left: 240px;
+}
+
+.card-index-7 {
+    position: absolute;
+    left: 280px;
+}
+
+.card-index-8 {
+    position: absolute;
+    left: 320px;
+}
+
+.card p {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 35px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 35px;
+    text-align: center;
+}
+
+.card.back {
+    background-color: #800080;
+    background-image: url('argyle.png');
+    /** Background from http://www.transparenttextures.com/ **/
+}
+
+.suitdiamonds {
+    color: #ff0000;
+}
+
+.suitdiamonds:before, .suitdiamonds:after {
+    content: "♦";
+}
+
+.suithearts {
+    color: #ff0000;
+}
+
+.suithearts:before, .suithearts:after {
+    content: "♥";
+}
+
+.suitclubs {
+    color: #000;
+}
+
+.suitclubs:before, .suitclubs:after {
+    content: "♣";
+}
+
+.suitspades {
+    color: #000;
+}
+
+.suitspades:before, .suitspades:after {
+    content: "♠";
+}
+
+div[class*='suit']:before {
+    position: absolute;
+    font-size: 35px;
+    width: 35px;
+    left: 0px;
+    top: 30px;
+    text-align: center;
+}
+
+div[class*='suit']:after {
+    position: absolute;
+    font-size: 35px;
+    right: 10px;
+    bottom: 1px;
+}
