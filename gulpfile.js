@@ -70,6 +70,14 @@ gulp.task('css', function () {
 });
 
 /**
+ * Copies application css to build folder
+ */
+gulp.task('images', function () {
+    return gulp.src('./src/content/*.png')
+        .pipe(gulp.dest('./build/content'));
+});
+
+/**
  * Copies html files to build folder
  */
 gulp.task('html', function () {
@@ -85,7 +93,7 @@ gulp.task('html', function () {
 gulp.task('injectDev', function(){
     return gulp.src('./src/index.html')
         .pipe(inject(gulp.src(['./src/app/**/*.module.js','./src/app/**/*.js','!./src/app/**/*.spec.js'], {read: false}), {relative: true, name: ''}))
-        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {name: 'bower', relative: true}))
+        .pipe(inject(gulp.src(bowerFiles({debugging: true}), {read: false}), {name: 'bower', relative: true}))
         .pipe(inject(gulp.src('./src/content/*.css',{read:false}), {relative: true}))
         .pipe(gulp.dest('./src'));
 });
@@ -93,6 +101,6 @@ gulp.task('injectDev', function(){
 
 
 
-gulp.task('build', ['inject']);
+gulp.task('build', ['inject', 'images']);
 
 gulp.task('buildDev', ['injectDev']);

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html data-ng-app="blackjack">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Blackjack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+        .ng-hide {
+            display: none!important;
+        }
+    </style>
+
+    <!-- bower:css -->
+    <link rel="stylesheet" href="content/blackjack.css">
+
+    <!-- endinject -->
+
+    <!-- inject:css -->
+
+    <!-- endinject -->
+
+
+</head>
+<body>
+<div class="card suitdiamonds">
+    <p>A</p>
+</div>
+<div class="card suitclubs">
+    <p>10</p>
+</div>
+<div class="card suitspades">
+    <p>8</p>
+</div>
+<div class="card suitclubs">
+    <p>9</p>
+</div>
+<div class="card back">
+</div>
+</body>
+</html>

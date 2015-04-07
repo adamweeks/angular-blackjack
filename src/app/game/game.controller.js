@@ -5,9 +5,9 @@
         .module('blackjack.game')
         .controller('GameController',GameController);
 
-    GameController.$inject = ['PlayerService', 'CardService', 'GameService', 'DealerService'];
+    GameController.$inject = ['$timeout','PlayerService', 'CardService', 'GameService', 'DealerService'];
 
-    function GameController(PlayerService, CardService, GameService, DealerService){
+    function GameController($timeout, PlayerService, CardService, GameService, DealerService){
         var game = this;
 
         /**
@@ -31,6 +31,9 @@
             game.betValue = 100;
             game.playerCards = [];
             game.handValue = 0;
+
+            game.updateButtons(false, false, false);
+
         };
 
         /**
@@ -41,6 +44,8 @@
             game.started = true;
             game.canDeal = true;
             game.showResults = false;
+
+            game.updateButtons(true, false, false);
         };
 
         /**
@@ -50,6 +55,8 @@
          */
         game.deal = function () {
             //Initialize values each game
+            game.updateButtons(false, false, false);
+
             game.busted = false;
             game.started = true;
             game.canDeal = false;
@@ -59,14 +66,14 @@
             game.player.changeScore(game.betValue * -1);
 
             //Shuffle before dealing
-            game.deck.shuffle();
+            game.deck.reset();
 
             //Empty our dealt card array
-            game.playerCards = [];
+            game.playerCards.length = 0;
 
             //Deal the cards
-            game.hit();
-            game.hit();
+            game.hit(false);
+            game.hit(false);
 
             //Deal to the dealer
             game.dealer.deal();
@@ -74,10 +81,37 @@
 
         /**
          * Adds a card to our hand and calculates value.
+         * @param animate - Animate the card in
          */
-        game.hit = function () {
-            game.playerCards.push(game.deck.deal());
-            game.getHandValue();
+        game.hit = function (animate) {
+            game.updateButtons(false, false, false);
+            var card = game.deck.deal();
+            game.dealCardToPlayer(card, animate, function(){
+                game.getHandValue();
+            });
+
+
+        };
+
+        /**
+         *
+         * @param card
+         * @param animate
+         * @param callback
+         */
+        game.dealCardToPlayer = function(card, animate, callback){
+            if(animate) {
+                card.hideValue = true;
+                game.playerCards.push(card);
+                $timeout(function () {
+                    card.hideValue = false;
+                    callback();
+                }, 250);
+            }
+            else{
+                game.playerCards.push(card);
+                callback();
+            }
         };
 
         /**
@@ -85,46 +119,51 @@
          * and 'pays' to player score
          */
         game.end = function () {
+            game.updateButtons(false, false, false);
             //Tell the dealer to finish his hand
-            game.dealer.finish();
-
-            if(game.busted){
-                game.results = "BUSTED";
-            }
-            else{
-                var wonGame = false;
-                var tiedGame = false;
-                //Check against dealer's hand
-                if(game.dealer.busted){
-                    //Auto Win if dealer busts
-                    wonGame = true;
+            game.dealer.finish(function(){
+                if(game.busted){
+                    game.results = "BUSTED";
                 }
                 else{
-                    if(game.dealer.handValue === game.handValue){
-                        tiedGame = true;
+                    var wonGame = false;
+                    var tiedGame = false;
+                    //Check against dealer's hand
+                    if(game.dealer.busted){
+                        //Auto Win if dealer busts
+                        wonGame = true;
                     }
                     else{
-                        wonGame = (game.handValue > game.dealer.handValue);
+                        if(game.dealer.handValue === game.handValue){
+                            tiedGame = true;
+                        }
+                        else{
+                            wonGame = (game.handValue > game.dealer.handValue);
+                        }
+                    }
+
+                    if(wonGame){
+                        //Winning pays double the bet
+                        game.player.changeScore(game.betValue * 2);
+                        game.results = "YOU WON!";
+                    }
+                    else if(tiedGame){
+                        //A 'PUSH' gives the player back their bet
+                        game.player.changeScore(game.betValue);
+                        game.results = "HAND PUSHED";
+                    }
+                    else{
+                        game.results = "DEALER WON";
                     }
                 }
 
-                if(wonGame){
-                    //Winning pays double the bet
-                    game.player.changeScore(game.betValue * 2);
-                    game.results = "YOU WON!";
-                }
-                else if(tiedGame){
-                    //A 'PUSH' gives the player back their bet
-                    game.player.changeScore(game.betValue);
-                }
-                else{
-                    game.results = "DEALER WON";
-                }
-            }
+                $timeout(function() {
+                    game.showResults = true;
+                    game.updateButtons(true, false, false);
+                },500);
+            });
 
-            game.canHit = false;
-            game.canDeal = true;
-            game.showResults = true;
+
         };
 
         /**
@@ -141,11 +180,25 @@
          */
         game.getHandValue = function () {
             game.handValue = GameService.handValue(game.playerCards);
-            game.canHit = game.handValue < game.maxValue;
             game.busted = game.handValue > game.maxValue;
             if(game.handValue >= game.maxValue){
                 game.end();
             }
+            else{
+                game.updateButtons(false, true, true);
+            }
+        };
+
+        /**
+         * Called after a game state changes and updates the status of the game action buttons.
+         * @param bet
+         * @param hit
+         * @param stay
+         */
+        game.updateButtons = function(bet, hit, stay) {
+            game.buttonBetEnabled = bet;
+            game.buttonHitEnabled = hit;
+            game.buttonStayEnabled = stay;
         };
 
         game.init();
