@@ -31,6 +31,9 @@
             game.betValue = 100;
             game.playerCards = [];
             game.handValue = 0;
+
+            game.updateButtons(false, false, false);
+
         };
 
         /**
@@ -41,6 +44,8 @@
             game.started = true;
             game.canDeal = true;
             game.showResults = false;
+
+            game.updateButtons(true, false, false);
         };
 
         /**
@@ -50,6 +55,8 @@
          */
         game.deal = function () {
             //Initialize values each game
+            game.updateButtons(false, false, false);
+
             game.busted = false;
             game.started = true;
             game.canDeal = false;
@@ -77,6 +84,7 @@
          * @param animate - Animate the card in
          */
         game.hit = function (animate) {
+            game.updateButtons(false, false, false);
             var card = game.deck.deal();
             game.dealCardToPlayer(card, animate, function(){
                 game.getHandValue();
@@ -111,6 +119,7 @@
          * and 'pays' to player score
          */
         game.end = function () {
+            game.updateButtons(false, false, false);
             //Tell the dealer to finish his hand
             game.dealer.finish(function(){
                 if(game.busted){
@@ -148,10 +157,9 @@
                     }
                 }
 
-                game.canHit = false;
-                game.canDeal = true;
                 $timeout(function() {
                     game.showResults = true;
+                    game.updateButtons(true, false, false);
                 },500);
             });
 
@@ -172,11 +180,25 @@
          */
         game.getHandValue = function () {
             game.handValue = GameService.handValue(game.playerCards);
-            game.canHit = game.handValue < game.maxValue;
             game.busted = game.handValue > game.maxValue;
             if(game.handValue >= game.maxValue){
                 game.end();
             }
+            else{
+                game.updateButtons(false, true, true);
+            }
+        };
+
+        /**
+         * Called after a game state changes and updates the status of the game action buttons.
+         * @param bet
+         * @param hit
+         * @param stay
+         */
+        game.updateButtons = function(bet, hit, stay) {
+            game.buttonBetEnabled = bet;
+            game.buttonHitEnabled = hit;
+            game.buttonStayEnabled = stay;
         };
 
         game.init();
