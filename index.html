@@ -1,1 +1,45 @@
-My Page
+<!DOCTYPE html>
+<html data-ng-app="blackjack">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Blackjack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+        .ng-hide {
+            display: none!important;
+        }
+    </style>
+
+    <!-- bower:css -->
+    <link rel="stylesheet" href="vendor/bootstrap.css">
+    <!-- endinject -->
+
+    <!-- inject:css -->
+    <link rel="stylesheet" href="content/blackjack.css">
+    <!-- endinject -->
+
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+
+
+</head>
+<body>
+    <div data-ng-include="'app/layout/shell.html'"></div>
+
+    <!-- bower:js -->
+    <script src="vendor/angular.js"></script>
+    <script src="vendor/bootstrap.js"></script>
+    <script src="vendor/jquery.js"></script>
+    <!-- endinject -->
+
+    <!-- Begin: Source JS -->
+    <!-- inject:js -->
+    <script src="app.js"></script>
+    <!-- endinject -->
+    <!-- End: Source JS -->
+
+</body>
+</html>

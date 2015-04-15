@@ -1,0 +1,52 @@
+<div>
+    <!-- Card Table -->
+    <div class="card-table">
+        <!-- Start Game -->
+        <div class="game-results" ng-if="!game.started">
+            <div class="result-text">
+                <button class="btn btn-primary" ng-click="game.start()">Start</button>
+            </div>
+        </div>
+
+        <!-- Game Results -->
+        <div class="game-results" ng-if="game.showResults">
+            <div class="result-text">
+                {{game.results}}
+            </div>
+        </div>
+        <!-- Hands -->
+        <div class="playing-area">
+            <div class="dealer-hand hand">
+                <blackjack-hand cards="game.dealer.cards"></blackjack-hand>
+            </div>
+            <div class="hand-spacer"></div>
+            <div class="player-hand hand">
+                <blackjack-hand cards="game.playerCards"></blackjack-hand>
+            </div>
+        </div>
+
+        <!-- Scoreboard -->
+        <div class="scoreboard" ng-if="game.started">
+            <p class="title">Player:</p>
+            <p class="detail">{{game.player.name}}</p>
+            <p class="title">Score:</p>
+            <p class="detail">{{game.player.score}}</p>
+        </div>
+
+        <!-- Actions -->
+        <div class="action-bar">
+            <div class="btn-group btn-group-justified">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-primary" ng-click="game.deal()" ng-disabled="!game.buttonBetEnabled">BET</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button class="btn btn-warning" ng-click="game.hit(true)" ng-disabled="!game.buttonHitEnabled">HIT</button>
+                </div>
+                <div class="btn-group" role="group">
+                    <button class="btn btn-danger" ng-click="game.end()" ng-disabled="!game.buttonStayEnabled">STAY</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
