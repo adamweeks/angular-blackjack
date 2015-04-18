@@ -5,7 +5,8 @@
         'blackjack.card',
         'blackjack.game',
         'blackjack.player',
-        'blackjack.dealer'
+        'blackjack.dealer',
+        'cfp.hotkeys'
     ]);
 
 })();
@@ -382,9 +383,9 @@
         .module('blackjack.game')
         .controller('GameController',GameController);
 
-    GameController.$inject = ['$timeout','PlayerService', 'CardService', 'GameService', 'DealerService'];
+    GameController.$inject = ['$timeout','PlayerService', 'CardService', 'GameService', 'DealerService', 'hotkeys'];
 
-    function GameController($timeout, PlayerService, CardService, GameService, DealerService){
+    function GameController($timeout, PlayerService, CardService, GameService, DealerService, hotkeys){
         var game = this;
 
         /**
@@ -410,6 +411,8 @@
             game.handValue = 0;
 
             game.updateButtons(false, false, false);
+
+            game.setupHotKeys();
 
         };
 
@@ -576,6 +579,38 @@
             game.buttonBetEnabled = bet;
             game.buttonHitEnabled = hit;
             game.buttonStayEnabled = stay;
+        };
+
+        game.setupHotKeys = function(){
+            hotkeys.add({
+                combo: 's',
+                description: 'Press to Stay',
+                callback: function() {
+                    if(game.buttonStayEnabled){
+                        game.end();
+                    }
+                }
+            });
+
+            hotkeys.add({
+                combo: 'h',
+                description: 'Press to Hit',
+                callback: function() {
+                    if(game.buttonHitEnabled){
+                        game.hit(true);
+                    }
+                }
+            });
+
+            hotkeys.add({
+                combo: 'b',
+                description: 'Press to Bet',
+                callback: function() {
+                    if(game.buttonBetEnabled){
+                        game.deal();
+                    }
+                }
+            });
         };
 
         game.init();
