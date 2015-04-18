@@ -1,10 +1,11 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var ngAnnotate = require('gulp-ng-annotate');
-var karma = require('karma').server;
-var del = require('del');
-var inject = require('gulp-inject');
-var bowerFiles = require('main-bower-files');
+var gulp        = require('gulp');
+var concat      = require('gulp-concat');
+var ngAnnotate  = require('gulp-ng-annotate');
+var karma       = require('karma').server;
+var del         = require('del');
+var inject      = require('gulp-inject');
+var bowerFiles  = require('main-bower-files');
+var ghPages     = require('gulp-gh-pages');
 
 //Configuration
 var buildFolder = __dirname + '/build/';
@@ -104,3 +105,8 @@ gulp.task('injectDev', function(){
 gulp.task('build', ['inject', 'images']);
 
 gulp.task('buildDev', ['injectDev']);
+
+gulp.task('deploy', ['build'], function(){
+    return gulp.src('./build/**/*')
+        .pipe(ghPages());
+});
