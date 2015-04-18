@@ -18,6 +18,7 @@ module.exports = function(config) {
 
         './src/bower_components/angular/angular.min.js',
         './src/bower_components/angular-mocks/angular-mocks.js',
+        './src/bower_components/angular-hotkeys/build/hotkeys.js',
         './src/app/blackjack.module.js',
         './src/app/**/*.module.js',
         './src/app/**/*.js',

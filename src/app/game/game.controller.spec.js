@@ -1,20 +1,23 @@
 'use strict';
 
 describe('GameController Unit Tests', function () {
-    var gameController, CardService, PlayerService, DealerService;
+    var gameController, CardService, PlayerService, DealerService, hotkeys;
     beforeEach(function () {
         module('blackjack.game');
         module('blackjack.player');
         module('blackjack.card');
         module('blackjack.dealer');
-        inject(function ($controller, _CardService_, _PlayerService_, _DealerService_) {
+        module('cfp.hotkeys');
+        inject(function ($controller, _CardService_, _PlayerService_, _DealerService_, _hotkeys_) {
             CardService = _CardService_;
             PlayerService = _PlayerService_;
             DealerService = _DealerService_;
+            hotkeys = _hotkeys_;
             gameController = $controller('GameController', {
                 CardService: CardService,
                 PlayerService: PlayerService,
-                DealerService: DealerService
+                DealerService: DealerService,
+                hotkeys: hotkeys
             });
         });
     });

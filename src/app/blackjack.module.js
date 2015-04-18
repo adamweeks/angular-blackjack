@@ -5,7 +5,8 @@
         'blackjack.card',
         'blackjack.game',
         'blackjack.player',
-        'blackjack.dealer'
+        'blackjack.dealer',
+        'cfp.hotkeys'
     ]);
 
 })();
