@@ -21,6 +21,21 @@ body {
     padding-bottom: 50px;
 }
 
+/** Login **/
+.login-window {
+    z-index: 10;
+    width: 100%;
+    top: 175px;
+    height: 120px;
+    position: absolute;
+    background-image: url('debut-dark.png');
+}
+
+.login-window .input-group {
+    margin: 0 auto;
+    font-size: 25px;
+}
+
 /** Scoreboard **/
 .scoreboard {
     position: absolute;

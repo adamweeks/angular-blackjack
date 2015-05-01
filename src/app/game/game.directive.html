@@ -2,10 +2,19 @@
     <!-- Card Table -->
     <div class="card-table">
         <!-- Start Game -->
-        <div class="game-results" ng-if="!game.started">
-            <div class="result-text">
-                <button class="btn btn-primary" ng-click="game.start()">Start</button>
-            </div>
+        <div class="login-window" ng-if="!game.started">
+            <h2>Welcome to Angular Blackjack!</h2>
+
+
+            <form class="form-inline">
+                <div class="form-group">
+                    <label class="sr-only" for="playerName">Player's name</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="playerName" placeholder="Enter your name" ng-model="playerName">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" ng-click="game.start(playerName)" ng-disabled="!playerName">Start</button>
+            </form>
         </div>
 
         <!-- Game Results -->

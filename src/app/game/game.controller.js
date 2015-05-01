@@ -41,8 +41,8 @@
         /**
          * Starts a game by creating a new player
          */
-        game.start = function () {
-            game.player = PlayerService.newPlayer('Ringo', 100);
+        game.start = function (playerName) {
+            game.player = PlayerService.newPlayer(playerName, 100);
             game.started = true;
             game.canDeal = true;
             game.showResults = false;
