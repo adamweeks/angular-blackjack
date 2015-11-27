@@ -1,4 +1,8 @@
-var angular = require('angular');
-var ngModule = angular.module('blackjack', []);
-
-require('./app/game')(ngModule);
+import angular from 'angular';
+import Game from './app/game';
+import Player from './app/player';
+		
+const ngModule = angular.module('blackjack', [
+        Game.name,
+        Player.name
+    ]);

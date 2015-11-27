@@ -1,5 +1,11 @@
-module.exports = function(ngModule) {
-	require('./game.directive')(ngModule);
-	require('./game.controller')(ngModule);
-	require('./game.service')(ngModule);
-};
+import angular from 'angular';
+import GameDirective from './game.directive';
+import GameService from './game.service';
+
+let gameModule = angular.module('blackjack.game', []);
+
+gameModule
+	.directive('blackjackGame', GameDirective)
+	.factory('GameService', GameService);
+
+export default gameModule;

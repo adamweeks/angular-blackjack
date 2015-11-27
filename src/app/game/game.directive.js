@@ -1,12 +1,14 @@
-module.exports = function(ngModule) {    
-    ngModule.directive('blackjackGame', blackjackGame);
-    
-    function blackjackGame(){
+import GameController from './game.controller';
+import template from './game.directive.html';
+
+let GameDirective =
+    function (){
         return {
             restrict: 'E',
-            template: require('./game.directive.html'),
-            controller: 'GameController',
+            template: template,
+            controller: GameController,
             controllerAs: 'game'
         }
-    }    
-};
+    };
+    
+export default GameDirective;     
