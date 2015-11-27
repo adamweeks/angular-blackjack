@@ -1,10 +1,6 @@
-(function(){
-    'use strict';
-
-    angular
-        .module('blackjack.game')
-        .directive('blackjackGame', blackjackGame);
-
+module.exports = function(ngModule) {    
+    ngModule.directive('blackjackGame', blackjackGame);
+    
     function blackjackGame(){
         return {
             restrict: 'E',
@@ -12,5 +8,5 @@
             controller: 'GameController',
             controllerAs: 'game'
         }
-    }
-})();
+    }    
+};

@@ -1,8 +1,5 @@
-(function(){
-    'use strict';
-
-    angular
-        .module('blackjack.game')
+module.exports = function(ngModule) {
+    ngModule    
         .factory('GameService', GameService);
 
     function GameService(){
@@ -63,4 +60,4 @@
 
         return service;
     }
-})();
+};

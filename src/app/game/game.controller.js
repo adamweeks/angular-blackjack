@@ -1,8 +1,5 @@
-(function(){
-    'use strict';
-
-    angular
-        .module('blackjack.game')
+module.exports = function(ngModule) {
+    ngModule    
         .controller('GameController',GameController);
 
     GameController.$inject = ['$timeout','PlayerService', 'CardService', 'GameService', 'DealerService', 'hotkeys'];
@@ -237,4 +234,5 @@
 
         game.init();
     }
-})();
+};
+
