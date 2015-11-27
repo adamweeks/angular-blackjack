@@ -4,7 +4,7 @@ module.exports = function(ngModule) {
     function blackjackGame(){
         return {
             restrict: 'E',
-            templateUrl: 'app/game/game.directive.html',
+            template: require('./game.directive.html'),
             controller: 'GameController',
             controllerAs: 'game'
         }
