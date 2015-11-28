@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 
-module.exports = {
+var config = {
 	context: __dirname + '/src',
 	devtool: 'source-map',
 	entry: './index.js',
@@ -19,10 +19,7 @@ module.exports = {
 		loaders: [
 			{
 				test: /\.js$/, 
-				loader: 'babel',
-				query: {
-					presets: ['es2015']
-				},
+				loader: 'ng-annotate!babel?presets[]=es2015',
 				exclude: /node_modules/
 			},
 			{
@@ -45,3 +42,10 @@ module.exports = {
 		]
 	}
 };
+
+if (process.env.NODE_ENV === 'production') {
+	config.output.path = __dirname + '/dist';
+	config.plugins.push(new webpack.optimize.UglifyJsPlugin());
+}
+
+module.exports = config;
