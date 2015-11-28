@@ -70,3 +70,7 @@ Icon?
 Thumbs.db
 packages
 build
+dist
+
+# Webpack
+src/bundle.js

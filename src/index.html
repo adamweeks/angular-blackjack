@@ -13,47 +13,38 @@
         }
     </style>
 
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/angular-hotkeys/build/hotkeys.min.css">
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <!-- endinject -->
-
-    <!-- inject:css -->
-    <link rel="stylesheet" href="content/blackjack.css">
-    <!-- endinject -->
-
     <link href='http://fonts.googleapis.com/css?family=Lora:400,700' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
 
 
 </head>
 <body>
-    <div data-ng-include="'app/layout/shell.html'"></div>
-
-    <!-- bower:js -->
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular-hotkeys/build/hotkeys.min.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <!-- endinject -->
-
-    <!-- Begin: Source JS -->
-    <!-- inject:js -->
-    <script src="app/blackjack.module.js"></script>
-    <script src="app/card/card.module.js"></script>
-    <script src="app/dealer/dealer.module.js"></script>
-    <script src="app/game/game.module.js"></script>
-    <script src="app/player/player.module.js"></script>
-    <script src="app/card/card.directive.js"></script>
-    <script src="app/card/card.hand.directive.js"></script>
-    <script src="app/card/card.service.js"></script>
-    <script src="app/dealer/dealer.service.js"></script>
-    <script src="app/game/game.controller.js"></script>
-    <script src="app/game/game.directive.js"></script>
-    <script src="app/game/game.service.js"></script>
-    <script src="app/player/player.service.js"></script>
-    <!-- endinject -->
-    <!-- End: Source JS -->
-
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Angular Blackjack</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li><a href="http://www.github.com/adamweeks/angular-blackjack">Source Code</a></li>
+                    <li><a href="http://www.adamweeks.com">Author</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="primary-area">
+            <blackjack-game></blackjack-game>
+        </div>
+    </div>
+    <script src="bundle.js"></script>
 </body>
 </html>

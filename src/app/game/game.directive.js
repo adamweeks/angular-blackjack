@@ -1,16 +1,14 @@
-(function(){
-    'use strict';
+import GameController from './game.controller';
+import template from './game.directive.html';
 
-    angular
-        .module('blackjack.game')
-        .directive('blackjackGame', blackjackGame);
-
-    function blackjackGame(){
+let GameDirective =
+    function (){
         return {
             restrict: 'E',
-            templateUrl: 'app/game/game.directive.html',
-            controller: 'GameController',
+            template: template,
+            controller: GameController,
             controllerAs: 'game'
         }
-    }
-})();
+    };
+    
+export default GameDirective;     
